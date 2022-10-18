@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    </head>
+
+	<body class="loggedin">
+		<nav class="navtop">
+			<div>
+				<h1><a href="{{ url_for('main.index') }}"><i class="fas fa-home"></i>W O T</a></h1>
+				<a href="{{ url_for('main.profile') }}"><i class="fas fa-user-circle"></i>Profile</a>
+				<a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+			</div>
+		</nav>
+        {% block content %}{% endblock %}
+	</body>
+
+</html>

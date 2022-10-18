@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}WOT - Login{% endblock %}
+
+{% block content %}
+<div class="login">
+    <h1>Login</h1>
+    <div class="links">
+        <a href="{{ url_for('auth.login') }}" class="active">Login</a>
+        <a href="{{ url_for('auth.register') }}">Register</a>
+    </div>
+    <form action="{{ url_for('auth.login') }}" method="post">
+        <label for="username">
+            <i class="fas fa-user"></i>
+        </label>
+        <input type="text" name="login" placeholder="Login" id="username" required>
+        <label for="password">
+            <i class="fas fa-lock"></i>
+        </label>
+        <input type="password" name="pass" placeholder="Password" id="password" required>
+        <div class="msg">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-success">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        </div>
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
