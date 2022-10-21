@@ -19,9 +19,9 @@ def run(logger):
 	CONFIG = Config(path=f"{BASE}/config.ini").readConfig()
 	DB = Database(LOGGER, CONFIG)
 
-	LOGGER.Info(f"Starting {CONFIG['VKore']['name']}")
+	LOGGER.info(f"Starting {CONFIG['VKore']['name']}")
 	WOT = main.init(CONFIG, LOGGER, NAME, DB, BASE)
-	LOGGER.Info(f"Serving WOT on {CONFIG['Settings']['host']}:{CONFIG['Settings']['port']}")
+	LOGGER.info(f"Serving WOT on {CONFIG['Settings']['host']}:{CONFIG['Settings']['port']}")
 	WOT.run(CONFIG['Settings']['host'], CONFIG['Settings']['port'])
 
 # start up wot

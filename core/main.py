@@ -36,13 +36,13 @@ def init(config, logger, name, db, base):
         static_folder = f"{BASE}/static"
     )
     WOT.config['SECRET_KEY'] = 'your-secret-key-goes-here'
-    LOGGER.Info("Initialized Web Engine")
+    LOGGER.info("Initialized Web Engine")
 
     global DB_LINK, DB_CONN
     DB_LINK, DB_CONN = db.connectMysql()
-    LOGGER.Info("Initialized Database")
+    LOGGER.info("Initialized Database")
 
     initBlueprints(WOT)
-    LOGGER.Info("Initialized Blueprints")
+    LOGGER.info("Initialized Blueprints")
 
     return WOT

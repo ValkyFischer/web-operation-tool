@@ -32,13 +32,13 @@ def login_post():
     DB_LINK.execute(sql_user_check, [input_login, input_login])
     data = DB_LINK.fetchone()
     if data is None:
-        LOGGER.Info(ERROR['Login-1'], input_login)
+        LOGGER.info(ERROR['Login-1'], input_login)
         flash(ERROR['Login-1'])
         return redirect(url_for('auth.login'))
 
     argon = PasswordHasher(time_cost=4, parallelism=1)
     if not argon.verify(data['password'], input_password):
-        LOGGER.Info(ERROR['Login-2'], input_login)
+        LOGGER.info(ERROR['Login-2'], input_login)
         flash(ERROR['Login-2'])
         return redirect(url_for('auth.login'))
 
@@ -60,32 +60,32 @@ def register_post():
     input_password2 = request.form.get('repass')
 
     if len(input_name) > 20 or len(input_name) < 3:
-        LOGGER.Info(ERROR['Register-2'], input_name, input_email)
+        LOGGER.info(ERROR['Register-2'], input_name, input_email)
         flash(ERROR['Register-2'])
         return redirect(url_for('auth.register'))
 
     if len(input_password) < 8:
-        LOGGER.Info(ERROR['Register-3'], input_name, input_email)
+        LOGGER.info(ERROR['Register-3'], input_name, input_email)
         flash(ERROR['Register-3'])
         return redirect(url_for('auth.register'))
 
     if input_password != input_password2:
-        LOGGER.Info(ERROR['Register-4'], input_name, input_email)
+        LOGGER.info(ERROR['Register-4'], input_name, input_email)
         flash(ERROR['Register-4'])
         return redirect(url_for('auth.register'))
 
     if not re.match(r'[^@]+@[^@]+\.[^@]+', input_email):
-        LOGGER.Info(ERROR['Register-5'], input_name, input_email)
+        LOGGER.info(ERROR['Register-5'], input_name, input_email)
         flash(ERROR['Register-5'])
         return redirect(url_for('auth.register'))
 
     if not re.match(r'[A-Za-z0-9]+', input_name):
-        LOGGER.Info(ERROR['Register-6'], input_name, input_email)
+        LOGGER.info(ERROR['Register-6'], input_name, input_email)
         flash(ERROR['Register-6'])
         return redirect(url_for('auth.register'))
 
     if not input_email or not input_name or not input_password or not input_password2:
-        LOGGER.Info(ERROR['Register-7'], input_name, input_email)
+        LOGGER.info(ERROR['Register-7'], input_name, input_email)
         flash(ERROR['Register-7'])
         return redirect(url_for('auth.register'))
 
@@ -94,7 +94,7 @@ def register_post():
     DB_LINK.execute(sql_user_check, [input_name, input_email])
     data = DB_LINK.fetchone()
     if data is not None:
-        LOGGER.Info(ERROR['Register-1'], input_name, input_email)
+        LOGGER.info(ERROR['Register-1'], input_name, input_email)
         flash(ERROR['Register-1'])
         return redirect(url_for('auth.register'))
 
@@ -114,7 +114,7 @@ def register_post():
     DB_LINK.execute(sql_user_new, [input_name, password, input_email, email_verify, authKey, ip_address, register_time])
     DB_CONN.commit()
 
-    LOGGER.Info(INFO['Register-5'].format(input_name), input_email)
+    LOGGER.info(INFO['Register-5'].format(input_name), input_email)
     flash(INFO['Register-5'].format(input_name))
     return redirect(url_for('auth.login'))
 
