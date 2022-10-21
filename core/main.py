@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import cli
 
 BASE = None
 NAME = None
@@ -23,6 +24,7 @@ def initBlueprints(app):
 
 
 def init(config, logger, name, db, base):
+    cli.show_server_banner = lambda *_: None
 
     global CONFIG, LOGGER, NAME, BASE
     LOGGER = logger
