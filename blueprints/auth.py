@@ -5,9 +5,15 @@ import time
 from argon2 import PasswordHasher
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 
-from core.main import DB_LINK, DB_CONN, NAME, LOGGER, CONFIG
-from core.tools import generateCode
-from core.strings import ERROR, INFO
+try:
+    from ..core.main import DB_LINK, DB_CONN, NAME, LOGGER, CONFIG
+    from ..core.tools import generateCode
+    from ..core.strings import ERROR, INFO
+
+except ImportError:
+    from core.main import DB_LINK, DB_CONN, NAME, LOGGER, CONFIG
+    from core.tools import generateCode
+    from core.strings import ERROR, INFO
 
 auth = Blueprint('auth', NAME)
 

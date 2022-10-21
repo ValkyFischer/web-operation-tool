@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, url_for, redirect
-from core.main import NAME
+try: from ..core.main import NAME
+except ImportError: from core.main import NAME
 
 public = Blueprint('main', NAME)
 
