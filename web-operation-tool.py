@@ -10,12 +10,11 @@ def run(logger):
 	if logger is None:
 		from core import main
 		BASE = "."
-		LOGGER = Logger(name=NAME)
 	else:
 		from .core import main
 		BASE = f"./modules/{NAME}"
-		LOGGER = logger
 
+	LOGGER = Logger(name=NAME)
 	CONFIG = Config(path=f"{BASE}/config.ini").readConfig()
 	DB = Database(LOGGER, CONFIG)
 
